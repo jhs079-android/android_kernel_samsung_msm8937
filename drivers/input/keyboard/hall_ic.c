@@ -71,7 +71,7 @@ static void flip_cover_work(struct work_struct *work)
 #if defined(CONFIG_SENSORS_HALL_FOLDER)
 		input_report_switch(ddata->input, SW_LID, !flip_cover);	/* foder open : 0, close : 1 */
 #else
-		input_report_switch(ddata->input, SW_FLIP, flip_cover);
+		input_report_switch(ddata->input, SW_LID, flip_cover);
 #endif
 		input_sync(ddata->input);
 	}
@@ -92,7 +92,7 @@ static void flip_cover_work(struct work_struct *work)
 #if defined(CONFIG_SENSORS_HALL_FOLDER)
 	input_report_switch(ddata->input, SW_LID, !flip_cover);	/* foder open : 0, close : 1 */
 #else
-	input_report_switch(ddata->input, SW_FLIP, flip_cover);
+	input_report_switch(ddata->input, SW_LID, flip_cover);
 #endif
 	input_sync(ddata->input);
 }
@@ -243,7 +243,7 @@ static int hall_probe(struct platform_device *pdev)
 #if defined(CONFIG_SENSORS_HALL_FOLDER)
 	input_set_capability(input, EV_SW, SW_LID);
 #else
-	input_set_capability(input, EV_SW, SW_FLIP);
+	input_set_capability(input, EV_SW, SW_LID);
 #endif
 
 	input->open = hall_open;
