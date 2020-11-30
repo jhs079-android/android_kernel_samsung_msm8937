@@ -81,4 +81,4 @@ $(obj)/../../%.dtb: $(src)/%.dts FORCE
 
 dtbs: $(addprefix $(obj)/../../,$(dtb-y))
 endif
-clean-files := *.dtb *.reserve.dts
+clean-files := *.dtb
