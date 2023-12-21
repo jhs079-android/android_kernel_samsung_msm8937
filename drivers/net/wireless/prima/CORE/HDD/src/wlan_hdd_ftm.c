@@ -1628,7 +1628,6 @@ int wlan_hdd_ftm_close(hdd_context_t *pHddCtx)
         VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_FATAL,
                   "%s: Ftm has been started. stopping ftm", __func__);
         wlan_ftm_stop(pHddCtx);
-        pHddCtx->ftm.ftm_state = WLAN_FTM_STOPPED;
     }
 #ifdef WLAN_KD_READY_NOTIFIER
     nl_srv_exit(pHddCtx->ptt_pid);
@@ -4784,8 +4783,9 @@ static VOS_STATUS wlan_ftm_priv_get_mac_address(hdd_adapter_t *pAdapter,char *bu
        {
             vos_nv_readMacAddress(macAddr);
 
+	/*Samsung Specific code , Use MACRO to print MAC ADDR*/
          ret = snprintf(buf, WE_FTM_MAX_STR_LEN,
-                             "%02x:%02x:%02x:%02x:%02x:%02x",
+						MAC_ADDRESS_STR,
                         MAC_ADDR_ARRAY(macAddr));
          if( ret < 0 || ret >= WE_FTM_MAX_STR_LEN )
          {
@@ -4795,9 +4795,10 @@ static VOS_STATUS wlan_ftm_priv_get_mac_address(hdd_adapter_t *pAdapter,char *bu
    }
    else
    {
+	/*Samsung Specific code , Use MACRO to print MAC ADDR*/
          /*Return Hard coded mac address*/
       ret = snprintf(buf, WE_FTM_MAX_STR_LEN,
-                            "%02x:%02x:%02x:%02x:%02x:%02x",
+					MAC_ADDRESS_STR,
                      MAC_ADDR_ARRAY(macAddr));
 
       if( ret < 0 || ret >= WE_FTM_MAX_STR_LEN )

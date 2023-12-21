@@ -2357,12 +2357,20 @@ __wlan_hdd_add_virtual_intf(struct wiphy *wiphy,
     pAdapter = NULL;
     if (pHddCtx->cfg_ini->isP2pDeviceAddrAdministrated &&
         ((NL80211_IFTYPE_P2P_GO == type) ||
-         (NL80211_IFTYPE_P2P_CLIENT == type)))
+         (NL80211_IFTYPE_P2P_CLIENT == type)
+#ifdef SEC_READ_MACADDR_SYSFS
+        || !(strncmp(name, "swlan", 5))))
+#endif /* SEC_READ_MACADDR_SYSFS */
     {
             /* Generate the P2P Interface Address. this address must be
              * different from the P2P Device Address.
              */
             v_MACADDR_t p2pDeviceAddress = pHddCtx->p2pDeviceAddress;
+#ifdef CONFIG_SEC
+                       if(!(strncmp(name, "swlan", 5)))
+                               p2pDeviceAddress.bytes[4] ^= 0x40;
+                       else
+#endif
             p2pDeviceAddress.bytes[4] ^= 0x80;
             pAdapter = hdd_open_adapter( pHddCtx,
                                          wlan_hdd_get_session_type(type),
@@ -2762,7 +2770,6 @@ void __hdd_indicate_mgmt_frame(hdd_adapter_t *pAdapter,
     /* Get pAdapter from Destination mac address of the frame */
     if ((type == SIR_MAC_MGMT_FRAME) &&
         (subType != SIR_MAC_MGMT_PROBE_REQ) &&
-        (nFrameLength > WLAN_HDD_80211_FRM_DA_OFFSET + VOS_MAC_ADDR_SIZE) &&
         !vos_is_macaddr_broadcast(
          (v_MACADDR_t *)&pbFrames[WLAN_HDD_80211_FRM_DA_OFFSET]))
     {
@@ -2833,16 +2840,12 @@ void __hdd_indicate_mgmt_frame(hdd_adapter_t *pAdapter,
     cfgState = WLAN_HDD_GET_CFG_STATE_PTR( pAdapter );
 
     if ((type == SIR_MAC_MGMT_FRAME) &&
-        (subType == SIR_MAC_MGMT_ACTION) &&
-        (nFrameLength > WLAN_HDD_PUBLIC_ACTION_FRAME_OFFSET + 1))
+        (subType == SIR_MAC_MGMT_ACTION))
     {
         if(pbFrames[WLAN_HDD_PUBLIC_ACTION_FRAME_OFFSET] == WLAN_HDD_PUBLIC_ACTION_FRAME)
         {
             // public action frame
-            if((WLAN_HDD_PUBLIC_ACTION_FRAME_OFFSET + SIR_MAC_P2P_OUI_SIZE + 2 <
-                nFrameLength) &&
-               (pbFrames[WLAN_HDD_PUBLIC_ACTION_FRAME_OFFSET+1] ==
-                SIR_MAC_ACTION_VENDOR_SPECIFIC) &&
+            if((pbFrames[WLAN_HDD_PUBLIC_ACTION_FRAME_OFFSET+1] == SIR_MAC_ACTION_VENDOR_SPECIFIC) &&
                 vos_mem_compare(&pbFrames[WLAN_HDD_PUBLIC_ACTION_FRAME_OFFSET+2], SIR_MAC_P2P_OUI, SIR_MAC_P2P_OUI_SIZE))
             // P2P action frames
             {
