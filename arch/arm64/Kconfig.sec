@@ -260,5 +260,108 @@ config MACH_J8Y18LTE_SEA_OPEN
 	bool "Samsung J8Y18-LTE SEA OPEN"
 	help
 	  Support for Samsung J8Y18-LTE SEA OPEN device.
-	  
 
+config SEC_GTA2SLTE_PROJECT
+  	depends on ARCH_MSM8937
+        default n
+        bool "Samsung GTA2SLTE Project"
+        help
+        Support for Samsung GTA2SLTE Project
+
+config MACH_GTA2SLTE_EUR_OPEN
+        depends on SEC_GTA2SLTE_PROJECT
+        default n
+        bool "Samsung GTA2SLTE EUR OPEN"
+        help
+        Support for Samsung GTA2SLTE EUR OPEN device.
+
+config MACH_GTA2SLTE_SEA_OPEN
+        depends on SEC_GTA2SLTE_PROJECT
+        default n
+        bool "Samsung GTA2SLTE SEA OPEN"
+        help
+        Support for Samsung GTA2SLTE SEA OPEN device.
+		
+config MACH_GTA2SLTE_CIS_SER
+        depends on SEC_GTA2SLTE_PROJECT
+        default n
+        bool "Samsung GTA2SLTE CIS SER"
+        help
+        Support for Samsung GTA2SLTE CIS SER device.
+		
+config MACH_GTA2SLTE_SWA_OPEN
+        depends on SEC_GTA2SLTE_PROJECT
+        default n
+        bool "Samsung GTA2SLTE SWA OPEN"
+        help
+        Support for Samsung GTA2SLTE SWA OPEN device.
+
+config MACH_GTA2SLTE_USA_ATT
+        depends on SEC_GTA2SLTE_PROJECT
+        default n
+        bool "Samsung GTA2SLTE USA ATT"
+        help
+        Support for Samsung GTA2SLTE USA ATT device.
+
+config MACH_GTA2SLTE_CHN_OPEN
+        depends on SEC_GTA2SLTE_PROJECT
+        default n
+        bool "Samsung GTA2SLTE CHN OPEN"
+        help
+        Support for Samsung GTA2SLTE CHN OPEN device.
+
+config MACH_GTA2SLTE_KOR_SKT
+        depends on SEC_GTA2SLTE_PROJECT
+        default n
+        bool "Samsung GTA2SLTE KOR SKT"
+        help
+        Support for Samsung GTA2SLTE KOR SKT device.
+
+config MACH_GTA2SLTE_KOR_KTT
+        depends on SEC_GTA2SLTE_PROJECT
+        default n
+        bool "Samsung GTA2SLTE KOR KTT"
+        help
+        Support for Samsung GTA2SLTE KOR KTT device.
+
+config MACH_GTA2SLTE_KOR_LGT
+        depends on SEC_GTA2SLTE_PROJECT
+        default n
+        bool "Samsung GTA2SLTE KOR LGT"
+        help
+        Support for Samsung GTA2SLTE KOR LGT device.
+
+config MACH_GTA2SLTE_CHN_ZH
+        depends on SEC_GTA2SLTE_PROJECT
+        default n
+        bool "Samsung GTA2SLTE CHN HK"
+        help
+        Support for Samsung GTA2SLTE CHN HK device.
+
+config SEC_GTA2SWIFI_PROJECT
+  	depends on ARCH_MSM8937
+        default n
+        bool "Samsung GTA2SWIFI Project"
+        help
+        Support for Samsung GTA2SWIFI Project
+
+config MACH_GTA2SWIFI_SEA_OPEN
+        depends on SEC_GTA2SWIFI_PROJECT
+        default n
+        bool "Samsung GTA2SWIFI SEA OPEN"
+        help
+        Support for Samsung GTA2SWIFI SEA OPEN device.
+
+config MACH_GTA2SWIFI_CHN_OPEN
+        depends on SEC_GTA2SWIFI_PROJECT
+        default n
+        bool "Samsung GTA2SWIFI CHN OPEN"
+        help
+        Support for Samsung GTA2SWIFI CHN OPEN device.
+
+config SEC_MSM8917_PROJECT
+  	depends on ARCH_MSM8917
+        default n
+        bool "Samsung MSM8917 Project"
+        help
+        Support for Samsung MSM8917 Project
