@@ -102,11 +102,14 @@ dtbs: prepare scripts
 ifeq ($(CONFIG_ARCH_SDM450),y)
 	$(Q)$(MAKE) $(build)=$(boot)/dts/samsung/sdm450
 # MSM8953
-else ifeq ($(CONFIG_ARCH_MSM8953),y)
+else ifeq ($(CONFIG_SEC_MSM8953_PROJECT),y)
 	$(Q)$(MAKE) $(build)=$(boot)/dts/samsung/msm8953
 # MSM8937
-else ifeq ($(CONFIG_ARCH_MSM8937),y)
+else ifeq ($(CONFIG_SEC_MSM8937_PROJECT),y)
 	$(Q)$(MAKE) $(build)=$(boot)/dts/samsung/msm8937
+# MSM8917
+else ifeq ($(CONFIG_SEC_MSM8917_PROJECT),y)
+	$(Q)$(MAKE) $(build)=$(boot)/dts/samsung/msm8917
 else
 	$(Q)$(MAKE) $(build)=$(boot)/dts/qcom
 endif
